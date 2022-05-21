@@ -23,4 +23,4 @@ if __name__ == '__main__':
         result = math.factorial(i * 1000)
         # Win + . - select unicode char
         progress_bar(i+1, n, width=20)
-print()
+    print()
