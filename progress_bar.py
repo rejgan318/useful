@@ -14,10 +14,10 @@ def progress_bar(progress: float | int, total: float | int, symbol: str = '█',
     """
     print(f'{symbol * int(width * progress / total):.<{width}} {round(progress / total * 100):3}%', end='\r')
 
+
 if __name__ == '__main__':
     import math
 
-    print('😀😁😂🤣😃😄😅😆ꊠ黠だ')
     n = 100
     for i in range(n):
         result = math.factorial(i * 1000)
