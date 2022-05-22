@@ -39,7 +39,7 @@ def get_page_quotes(url: str) -> list[dict]:
 
 
 console = Console()
-base_url = 'https://www.goodreads.com'
+base_url = '^'
 print('Go!')
 parsed = []
 url = base_url + '/quotes'

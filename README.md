@@ -2,7 +2,17 @@
 
 ## Что здесь?
 
-[Барабан](#111-барабан)
+Полезности и сервис, красивый вывод
+- [Простой самописный progress bar](#progress_barpy)
+- [Тест colorama](#colorama_testpy)
+- [rich progress bar](#rich_testpy)
+
+Тысты библиотек
+- [urllib3_test](#urllib3_testpy)
+- [BeautifulSoup, парсинг](#beautifulsoup)
+- [Pygame](#pygame_lesson3py)
+
+## Полезности и сервис, красивый вывод
 
 ### progress_bar.py 
 простой однострочный прогресс-бар с параметрыми
@@ -16,6 +26,8 @@
 
 - Console - с выводом символов юникода по символическим именам
 - track - красивый прогресс-бар
+
+## Тeсты библиотек
 
 ### urllib3_test.py
 Библиотека urllib3 — это мощный HTTP-клиент на Python c простым для понимания и продуманным кодом.
@@ -38,6 +50,7 @@
 
 **BeautifulSoup/scraping_quotes.py** парсинг сайта, модифицированный пример с [geeksforgeeks](https://www.geeksforgeeks.org/quote-guessing-game-using-web-scraping-in-python/)
 
-**BeautifulSoup/pasштп_goodreads.py** - еще одна заготовка парсинга сайта [www.goodreads.com](https://www.goodreads.com)
+**BeautifulSoup/parsing_goodreads.py** - еще одна заготовка парсинга сайта [www.goodreads.com](https://www.goodreads.com)
 
-### 111 барабан
+### pygame_lesson3.py 
+Тест библиотеки Pygame, простейшие рперации
