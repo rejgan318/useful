@@ -1,4 +1,7 @@
 # useful Полезности, тесты, эксперименты
+
+[PyPi](#111)
+
 ### progress_bar.py 
 простой однострочный прогресс-бар с параметрыми
 ### colorama_test.py
@@ -35,3 +38,4 @@
 
 **BeautifulSoup/pasштп_goodreads.py** - еще одна заготовка парсинга сайта [www.goodreads.com](https://www.goodreads.com)
 
+# 111
