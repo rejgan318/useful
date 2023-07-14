@@ -61,3 +61,8 @@
 - speech_recognition получения аудиопотока, распознования голоса
 - pyttsx3 воспроизведение текста
 - webbrowser запуск броузера
+
+### base64
+**generate_make_file_py.py** Generates a python program source file that can be used to create a binary file from a base64 string.
+
+data/small_probe.png input binary file 
