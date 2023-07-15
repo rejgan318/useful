@@ -24,7 +24,7 @@
 При устанвке Emulate terminal нормально отображается прогресс-бар в Pycharm, но не выводятся символы юникода. И наоборот. 
 В новом терминале Windows (PowerShell и cmd) отображается все корректно
 
-![](imgs/pycharm_set_configuration.jpg)
+![](assets/pycharm_set_configuration.jpg)
 
 - Console - с выводом символов юникода по символическим именам
 - track - красивый прогресс-бар
@@ -62,7 +62,9 @@
 - pyttsx3 воспроизведение текста
 - webbrowser запуск броузера
 
-### base64
-**generate_make_file_py.py** Generates a python program source file that can be used to create a binary file from a base64 string.
+### [base64](base64)
+**[generate_make_file_py.py](base64/generate_make_file_py.py)** Generates a python program source file that can be used to create a binary file from a base64 string.
 
-data/small_probe.png input binary file 
+[data/small_probe.png](base64/data/small_probe.png) data, input binary file
+
+
