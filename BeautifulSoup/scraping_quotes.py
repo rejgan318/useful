@@ -5,15 +5,24 @@
 from bs4 import BeautifulSoup
 import requests
 from rich.console import Console
+from dataclasses import dataclass, asdict
+import json
 
+
+@dataclass
+class Quote:
+    text: str
+    author: str
+    keywords: list[str]
+    autor_url: str
+
+parsed = {}
 console = Console()
 
 base_url = 'https://quotes.toscrape.com'
+FILE_TO_SAVE = 'quotes.json'
 page = 1
-print('Go!')
-authors = {}
-tags = set()
-
+id = 1
 while True:
     if page > 1:
         url = f"{base_url}{ref_next[0].attrs['href']}"
@@ -27,22 +36,28 @@ while True:
 
     quotes = soup.select('.quote')
     for quote in quotes:
-        text = quote.select('.text')[0].text
+        text = quote.select('.text')[0].text[1:-1]
         author = quote.select('.author')[0].text
         author_link = quote.select('a')[0]['href']
-        if authors.get(author, None) is None:
-            authors[author] = author_link
         keywords = quote.select('.tags a')
-        for keyword in keywords:
-            tags.add(keyword.text)
+
         console.rule("[bold cyan]" + author)
         console.print(text)
-        # console.print(f"Автор [cyan bold]{author}")
         console.print(', '.join([tag.text for tag in keywords]), style='green on black')
+
+        parsed[str(id)] =asdict(Quote(text=text,
+                                      author=author,
+                                      keywords=[tag.text for tag in keywords],
+                                      autor_url=author_link))
+        id += 1
+        # parsed.append(Quote(text=text, author=author, keywords=[tag.text for tag in keywords], autor_url=author_link))
 
     ref_next = soup.select('.next a')
     if not ref_next:
         break
     page += 1
+with open(FILE_TO_SAVE, 'w', encoding='utf-8') as file:
+    json.dump(parsed, file, ensure_ascii=False)
 
-print('Приехали!')
+print(f'Обработано {id - 1} цитат на {page} страниц, результат в {FILE_TO_SAVE}')
+
