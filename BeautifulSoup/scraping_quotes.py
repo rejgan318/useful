@@ -21,18 +21,22 @@ console = Console()
 
 base_url = 'https://quotes.toscrape.com'
 FILE_TO_SAVE = 'quotes.json'
-page = 1
+page = 0
 id = 1
-while True:
+
+ref_next = True
+while ref_next:
+    page += 1
     if page > 1:
         url = f"{base_url}{ref_next[0].attrs['href']}"
     else:
         url = base_url
     # print(f'Страница {page}: {url}')
     style = "bold white on blue"
+    console.rule(f"[{style}]{page}")
     with console.status(f'Страница {page}: {url}', spinner='arrow', spinner_style=style):
         response = requests.get(url)
-        soup = BeautifulSoup(response.text, 'html.parser')
+        soup = BeautifulSoup(response.text, 'html.parser')  # лучше и быстрее lxml, нужно устанавливать
 
     quotes = soup.select('.quote')
     for quote in quotes:
@@ -50,14 +54,10 @@ while True:
                                       keywords=[tag.text for tag in keywords],
                                       autor_url=author_link))
         id += 1
-        # parsed.append(Quote(text=text, author=author, keywords=[tag.text for tag in keywords], autor_url=author_link))
 
     ref_next = soup.select('.next a')
-    if not ref_next:
-        break
-    page += 1
+
 with open(FILE_TO_SAVE, 'w', encoding='utf-8') as file:
     json.dump(parsed, file, ensure_ascii=False)
 
-print(f'Обработано {id - 1} цитат на {page} страниц, результат в {FILE_TO_SAVE}')
-
+print(f'Обработано {len(parsed)} цитат на {page} страниц, результат в {FILE_TO_SAVE}')
