@@ -8,10 +8,11 @@ import hashlib
 import sys
 from pathlib import Path
 
-SOURCE_FILE = sys.executable
-NEW_FILE = "new_python" + Path(SOURCE_FILE).suffix
-file_size = Path(SOURCE_FILE).stat().st_size
 FRACTION = 3
+
+source_file = sys.executable
+new_file = "new_python" + Path(source_file).suffix
+file_size = Path(source_file).stat().st_size
 position = file_size // FRACTION   # точка для двух операций чтения и записи. Можно // 2, тогда две части будут равными
 
 def calculate_md5_checksum(file_path):
@@ -29,9 +30,9 @@ def get_bar(sym1, sym2):
     return f"{' data1 ':{sym1}^{int(80 / FRACTION)}}|{' data2 ':{sym2}^{80 - int(80 / FRACTION)}}"
 
 
-print(f"Read file {SOURCE_FILE}, size = {file_size}")
+print(f"Read file {source_file}, size = {file_size}")
 print(get_bar('-', '-'))
-with open(SOURCE_FILE, "rb") as f:
+with open(source_file, "rb") as f:
     f.seek(position)
     print(f"Read data2: from position {position} to end file, size = {file_size - position},")
     print(get_bar('-', 'r'))
@@ -43,8 +44,8 @@ with open(SOURCE_FILE, "rb") as f:
 
 assert len(data1) + len(data2) == file_size
 
-with open(NEW_FILE, "wb") as f:
-    print(f"Creating new file {NEW_FILE} size = {file_size}")
+with open(new_file, "wb") as f:
+    print(f"Creating new file {new_file} size = {file_size}")
     f.truncate(file_size)
     print(f"Write data2 from position {position} to end, size = {len(data2)}")
     print(get_bar('r', 'w'))
@@ -56,6 +57,6 @@ with open(NEW_FILE, "wb") as f:
     f.write(data1)
 
 print("Calculate and compare md5 checksums for source file and copied file")
-assert calculate_md5_checksum(SOURCE_FILE) == calculate_md5_checksum(NEW_FILE)
-print(f"Ok, files match. Delete {NEW_FILE}")
-Path(NEW_FILE).unlink()
+assert calculate_md5_checksum(source_file) == calculate_md5_checksum(new_file)
+print(f"Ok, files match. Delete {new_file}")
+Path(new_file).unlink()
