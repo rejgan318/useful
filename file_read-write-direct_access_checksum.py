@@ -24,13 +24,20 @@ def calculate_md5_checksum(file_path):
             hash_md5.update(chunk)
     return hash_md5.hexdigest()
 
+
+def get_bar(sym1, sym2):
+    return f"{' data1 ':{sym1}^{int(80 / FRACTION)}}|{' data2 ':{sym2}^{80 - int(80 / FRACTION)}}"
+
+
 print(f"Read file {SOURCE_FILE}, size = {file_size}")
-print(f"{' data1 ':-^{int(80 / FRACTION)}}|{' data2 ':-^{80 - int(80 / FRACTION)}}")
+print(get_bar('-', '-'))
 with open(SOURCE_FILE, "rb") as f:
     f.seek(position)
     print(f"Read data2: from position {position} to end file, size = {file_size - position},")
+    print(get_bar('-', 'r'))
     data2 = f.read(file_size - position)
     print(f"Read data1: from begin file to {position}, size = {position}")
+    print(get_bar('r', 'r'))
     f.seek(0)
     data1 = f.read(position)
 
@@ -40,9 +47,11 @@ with open(NEW_FILE, "wb") as f:
     print(f"Creating new file {NEW_FILE} size = {file_size}")
     f.truncate(file_size)
     print(f"Write data2 from position {position} to end, size = {len(data2)}")
+    print(get_bar('r', 'w'))
     f.seek(position)
     f.write(data2)
     print(f"Write data1 from begin, size = {len(data1)}")
+    print(get_bar('w', 'w'))
     f.seek(0)
     f.write(data1)
 
